@@ -53,17 +53,9 @@ The portfolio combines a bold visual system with an SEO-first architecture, acce
 
 ---
 
-## 🖼️ Preview
-
-Add screenshots or a screen recording here.
-
-```text
-Coming soon
-```
-
 You can also add your live portfolio:
 
-**Live:** `https://your-domain.com`
+**Live:** `https://udhayan-portfolio.netlify.app/`
 
 ---
 
