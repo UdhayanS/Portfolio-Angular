@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <title>New message from {{name}}</title>
+    <!--[if mso]>
+      <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+    <![endif]-->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+      @media only screen and (max-width: 600px) {
+        .sm-full { width: 100% !important; }
+        .sm-pad { padding-left: 22px !important; padding-right: 22px !important; }
+        .sm-h1 { font-size: 32px !important; }
+        .sm-stack { display: block !important; width: 100% !important; text-align: left !important; }
+        .sm-label { width: 100% !important; display: block !important; padding-bottom: 2px !important; }
+      }
+    </style>
+  </head>
+  <body style="margin:0;padding:0;background-color:#efebe5;-webkit-font-smoothing:antialiased;" bgcolor="#efebe5">
+    <!-- Preheader doubles as the inbox summary, so triage happens without opening. -->
+    <div style="display:none;font-size:1px;color:#efebe5;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+      {{name}} &lt;{{email}}&gt; — {{subject}}
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#efebe5" style="background-color:#efebe5;">
+      <tr>
+        <td align="center" style="padding:32px 12px;">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" class="sm-full" style="width:600px;max-width:600px;background-color:#ffffff;border:2px solid #0b0b0b;">
+
+            <!-- ── Masthead ───────────────────────────────────────── -->
+            <tr>
+              <td bgcolor="#0b0b0b" style="background-color:#0b0b0b;padding:20px 30px;" class="sm-pad">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="left" style="vertical-align:middle;">
+                      <span style="font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:22px;line-height:22px;color:#c6f32b;">US</span>
+                      <span style="font-family:Consolas,'Courier New',monospace;font-size:11px;line-height:22px;color:#8a857e;letter-spacing:0.14em;text-transform:uppercase;">&nbsp;&nbsp;Contact form</span>
+                    </td>
+                    <td align="right" style="vertical-align:middle;">
+                      <span style="font-family:Consolas,'Courier New',monospace;font-size:10px;color:#0b0b0b;background-color:#ff2d78;letter-spacing:0.14em;text-transform:uppercase;padding:5px 10px;font-weight:bold;">New message</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ── Who ────────────────────────────────────────────── -->
+            <tr>
+              <td style="padding:34px 30px 0;" class="sm-pad">
+                <p style="margin:0 0 6px;font-family:Consolas,'Courier New',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8a857e;">
+                  From
+                </p>
+                <h1 class="sm-h1" style="margin:0;font-family:'Anton','Arial Narrow',Impact,sans-serif;font-size:40px;line-height:1.02;color:#0b0b0b;text-transform:uppercase;letter-spacing:-0.01em;font-weight:400;">
+                  {{name}}
+                </h1>
+              </td>
+            </tr>
+
+            <!-- ── Meta: email / subject / time ───────────────────── -->
+            <tr>
+              <td style="padding:20px 30px 0;" class="sm-pad">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #e0dbd2;">
+                  <tr>
+                    <td class="sm-label" width="90" style="padding:11px 0 0;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857e;vertical-align:top;">Email</td>
+                    <td style="padding:11px 0 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#0b0b0b;">
+                      <a href="mailto:{{email}}" style="color:#0b0b0b;text-decoration:underline;">{{email}}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="sm-label" width="90" style="padding:9px 0 0;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857e;vertical-align:top;">Subject</td>
+                    <td style="padding:9px 0 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#0b0b0b;font-weight:bold;">{{subject}}</td>
+                  </tr>
+                  <tr>
+                    <td class="sm-label" width="90" style="padding:9px 0 11px;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857e;vertical-align:top;">Received</td>
+                    <td style="padding:9px 0 11px;font-family:Helvetica,Arial,sans-serif;font-size:14px;color:#4a4741;">{{time}}</td>
+                  </tr>
+                  <tr><td colspan="2" style="border-top:1px solid #e0dbd2;font-size:0;line-height:0;">&nbsp;</td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ── Message ────────────────────────────────────────── -->
+            <tr>
+              <td style="padding:24px 30px 0;" class="sm-pad">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#efebe5" style="background-color:#efebe5;border-left:4px solid #c6f32b;">
+                  <tr>
+                    <td style="padding:18px 20px;">
+                      <p style="margin:0 0 10px;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857e;">
+                        Message
+                      </p>
+                      <p style="margin:0;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#26241f;white-space:pre-wrap;">{{message}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ── Action ─────────────────────────────────────────── -->
+            <tr>
+              <td style="padding:26px 30px 34px;" class="sm-pad">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <!-- Prefilled reply: opens addressed to them, subject threaded. -->
+                    <td bgcolor="#0b0b0b" style="background-color:#0b0b0b;">
+                      <a href="mailto:{{email}}?subject=Re:%20{{subject}}" style="display:inline-block;padding:13px 26px;font-family:Consolas,'Courier New',monospace;font-size:12px;font-weight:bold;letter-spacing:0.12em;text-transform:uppercase;color:#c6f32b;text-decoration:none;">
+                        Reply to {{name}} &rarr;
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- ── Footer ─────────────────────────────────────────── -->
+            <tr>
+              <td bgcolor="#0b0b0b" style="background-color:#0b0b0b;padding:14px 30px;" class="sm-pad">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td align="left" class="sm-stack">
+                      <p style="margin:0;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.08em;color:#8a857e;">
+                        Sent from the portfolio contact form
+                      </p>
+                    </td>
+                    <td align="right" class="sm-stack">
+                      <p style="margin:0;font-family:Consolas,'Courier New',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#c6f32b;">
+                        udhayan-portfolio.netlify.app
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

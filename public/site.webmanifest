@@ -1,0 +1,16 @@
+{
+  "name": "Udhayan S — Software Engineer & Product Builder",
+  "short_name": "Udhayan S",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0b",
+  "theme_color": "#0b0b0b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+<section class="contact section section--paper" id="contact">
+  <div class="shell">
+    <div class="contact__grid">
+      <!-- Left: the invitation -->
+      <div class="contact__lead">
+        <p class="contact__available" appReveal>
+          <span class="contact__pulse" aria-hidden="true"></span>
+          {{ contact.availability }}
+        </p>
+
+        <h2 class="contact__title display" appReveal="60">{{ contact.headline }}</h2>
+        <p class="contact__body lede" appReveal="120">{{ contact.body }}</p>
+
+        <div class="contact__email" appReveal="180">
+          <a class="contact__email-link" [href]="'mailto:' + profile.email">
+            {{ profile.email }}
+          </a>
+          <button
+            type="button"
+            class="contact__copy"
+            (click)="copyEmail()"
+            [attr.aria-label]="'Copy ' + profile.email + ' to clipboard'"
+          >
+            {{ copied() ? 'Copied ✓' : 'Copy' }}
+          </button>
+        </div>
+
+        <ul class="contact__socials" appReveal="240">
+          @for (social of profile.socials; track social.label) {
+            <li>
+              <a
+                [href]="social.href"
+                [attr.target]="social.label === 'Email' ? null : '_blank'"
+                [attr.rel]="social.label === 'Email' ? null : 'noopener noreferrer'"
+              >
+                <app-icon [name]="$any(social.icon)" [size]="18" />
+                <span class="contact__social-label">{{ social.label }}</span>
+                <span class="contact__social-handle">{{ social.handle }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+
+        <div class="contact__meta" appReveal="300">
+          <span><app-icon name="pin" [size]="15" /> {{ profile.location }}</span>
+          <span>{{ profile.timezone }}</span>
+          <a class="contact__resume" [href]="profile.resume" download>
+            <app-icon name="download" [size]="15" />
+            Download résumé
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: the form -->
+      <div class="contact__form-wrap" appReveal="100">
+        <form class="contact__form" (submit)="submit($any($event))">
+          <!-- Honeypot: hidden from people, irresistible to bots. -->
+          <p class="visually-hidden" aria-hidden="true">
+            <label>
+              Company (leave blank)
+              <input name="company" tabindex="-1" autocomplete="off" />
+            </label>
+          </p>
+
+          <div class="field">
+            <label for="cf-name">Your name</label>
+            <input id="cf-name" name="name" type="text" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input
+              id="cf-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="field">
+            <label for="cf-subject">What's this about?</label>
+            <select id="cf-subject" name="subject" required>
+              <option>A full-time role</option>
+              <option>A freelance build</option>
+              <option>SEO, domain or mail help</option>
+              <option>Something else</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button class="btn" type="submit" [disabled]="state() === 'sending'">
+            {{ state() === 'sending' ? 'Sending…' : 'Send it' }}
+            <app-icon name="arrow" [size]="17" />
+          </button>
+
+          <p class="contact__status" role="status" aria-live="polite">
+            @switch (state()) {
+              @case ('sent') {
+                <span class="contact__status--ok">
+                  Got it — I'll reply within a day.
+                </span>
+              }
+              @case ('throttled') {
+                <span class="contact__status--wait">
+                  You just sent one — give it a few seconds, then try again.
+                </span>
+              }
+              @case ('error') {
+                <span class="contact__status--bad">
+                  That didn't send. Email me directly at
+                  <a [href]="'mailto:' + profile.email">{{ profile.email }}</a
+                  >.
+                </span>
+              }
+            }
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div class="contact__quote">
+      <app-pull-quote [quote]="quote" />
+    </div>
+  </div>
+</section>

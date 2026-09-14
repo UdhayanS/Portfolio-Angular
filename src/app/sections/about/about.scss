@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+/* ---------- Stat strip ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+  margin-bottom: clamp(4rem, 9vw, 7rem);
+}
+
+.stats__card {
+  container-type: inline-size;
+  background: var(--ink);
+  color: var(--on-ink);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 2.5vw, 1.9rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-bottom: 6px solid var(--accent);
+  box-shadow: 0 18px 40px rgba(11, 11, 11, 0.18);
+}
+
+.stats__value {
+  font-size: clamp(2.4rem, 24cqi, 4.4rem);
+  color: var(--accent);
+}
+
+.stats__label {
+  font-size: var(--t-sm);
+  line-height: 1.4;
+  color: var(--on-ink-dim);
+}
+
+/* ---------- Body ---------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.about__dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pink);
+  margin-right: 0.6rem;
+}
+
+.about__lead {
+  container-type: inline-size;
+}
+
+.about__title {
+  font-size: clamp(2rem, 14cqi, 5rem);
+  margin-block: 1rem 2.5rem;
+  text-wrap: balance;
+}
+
+.about__facts {
+  display: grid;
+  gap: 0;
+  border-top: 1.5px solid var(--line-strong);
+}
+
+.about__fact {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-bottom: 1.5px solid var(--line);
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--on-paper-dim);
+  }
+
+  dd {
+    margin: 0;
+    font-size: var(--t-sm);
+    font-weight: 500;
+  }
+}
+
+.about__body {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about__para {
+  font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+  line-height: 1.68;
+  max-width: 58ch;
+}
+
+.about__para:first-child::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.6em;
+  line-height: 0.76;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--pink);
+}
+
+.about__quote {
+  margin-top: clamp(4rem, 9vw, 7rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1.5px solid var(--line-strong);
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about__fact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+  }
+
+  .about__quote {
+    justify-content: flex-start;
+  }
+}

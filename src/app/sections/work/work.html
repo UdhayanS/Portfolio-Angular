@@ -1,0 +1,99 @@
+<section class="work section section--ink" id="work">
+  <div class="shell">
+    <div class="work__top">
+      <app-section-head
+        kicker="Selected work"
+        title="Things that are live."
+        lede="Two products of my own, four client businesses across three countries, and the open-source I build for the fun of it."
+        accent="lime"
+      />
+      <div class="work__quote">
+        <app-pull-quote [quote]="quote" tone="ink" placement="end" />
+      </div>
+    </div>
+
+    <div class="work__filters" role="tablist" aria-label="Filter work by type" appReveal>
+      @for (filter of filters; track filter.key) {
+        <button
+          type="button"
+          role="tab"
+          class="work__filter"
+          [class.is-active]="active() === filter.key"
+          [attr.aria-selected]="active() === filter.key"
+          (click)="active.set(filter.key)"
+        >
+          {{ filter.label }}
+          <span class="work__count">{{ counts()[filter.key] ?? 0 }}</span>
+        </button>
+      }
+    </div>
+
+    <ul class="work__grid stage" [appSpatialStage]="0.35">
+      @for (project of projects(); track project.name; let i = $index) {
+        <li
+          class="work__card plane"
+          [style.--accent]="'var(--' + project.accent + ')'"
+          [style.--depth]="10 + (i % 3) * 16"
+          [style.--drift]="0.35 + (i % 3) * 0.14"
+          [appReveal]="(i % 3) * 90"
+        >
+          <div class="work__card-top">
+            <span class="work__num">{{ pad(i) }}</span>
+            <span class="work__kind">{{ label(project.kind) }}</span>
+            <span class="work__year">{{ project.year }}</span>
+          </div>
+
+          <h3 class="work__name display">{{ project.name }}</h3>
+          <p class="work__tagline">{{ project.tagline }}</p>
+          <p class="work__blurb">{{ project.blurb }}</p>
+
+          @if (project.metrics?.length) {
+            <ul class="work__metrics">
+              @for (metric of project.metrics; track metric.label) {
+                <li>
+                  <span class="work__metric-value">{{ metric.value }}</span>
+                  <span class="work__metric-label">{{ metric.label }}</span>
+                </li>
+              }
+            </ul>
+          }
+
+          <ul class="work__stack">
+            @for (tech of project.stack; track tech) {
+              <li class="chip">{{ tech }}</li>
+            }
+          </ul>
+
+          <footer class="work__foot">
+            <span class="work__role">{{ project.role }}</span>
+            <span class="work__links">
+              @if (project.href) {
+                <a
+                  class="work__link"
+                  [href]="project.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>{{ project.hrefLabel ?? 'Visit' }}</span>
+                  <app-icon name="external" [size]="15" />
+                </a>
+              }
+              @if (project.repo) {
+                <a
+                  class="work__link"
+                  [href]="project.repo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  [attr.aria-label]="project.name + ' on GitHub'"
+                >
+                  <app-icon name="github" [size]="16" />
+                  <span>Source</span>
+                </a>
+              }
+            </span>
+          </footer>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

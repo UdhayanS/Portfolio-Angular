@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      IFRAME VARIANT — use index.html (the redirect) unless you specifically
+      need the old URL to stay in the address bar.
+
+      Two things to know before deploying this one:
+
+      1. netlify.toml in the portfolio repo sets `X-Frame-Options = "DENY"`,
+         which makes this frame render blank. It is not active on the current
+         deploy (the headers are missing, so netlify.toml is not being picked
+         up), which is why this works today — but it will break the moment that
+         config takes effect. To use this properly, delete the X-Frame-Options
+         line from netlify.toml and add instead:
+             Content-Security-Policy = "frame-ancestors 'self' https://udhayans.github.io"
+
+      2. Google credits framed content to the frame's own URL, not this page.
+         This page would rank for nothing, and the canonical below is the only
+         thing keeping the two URLs from competing as duplicates.
+    -->
+    <link rel="canonical" href="https://udhayan-portfolio.netlify.app/" />
+    <meta name="google-site-verification" content="scjnpg7G8S3-f4W7EcbvgdRB73VVS4DbBVCEFtpcBCY" />
+
+    <title>Udhayan S — Software Engineer &amp; Product Builder</title>
+    <meta
+      name="description"
+      content="Udhayan S — Software Engineer in Chennai building enterprise HR systems, two live SaaS products and client sites across India, the UAE and Saudi Arabia."
+    />
+    <meta name="author" content="Udhayan S" />
+
+    <style>
+      html, body { margin: 0; padding: 0; height: 100%; background: #0b0b0b; }
+      iframe { display: block; width: 100%; height: 100%; border: 0; }
+      /* Shown only if the frame fails to paint (headers, blockers, old browser). */
+      .fallback {
+        position: fixed; inset: 0; z-index: -1;
+        display: flex; align-items: center; justify-content: center;
+        padding: 24px; text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        color: #f4f1ec;
+      }
+      .fallback a { color: #c6f32b; }
+    </style>
+  </head>
+  <body>
+    <div class="fallback">
+      <p>
+        Loading the portfolio&hellip; if nothing appears,
+        <a href="https://udhayan-portfolio.netlify.app/">open it directly</a>.
+      </p>
+    </div>
+
+    <iframe
+      src="https://udhayan-portfolio.netlify.app/"
+      title="Udhayan S — Software Engineer &amp; Product Builder"
+      loading="eager"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </body>
+</html>

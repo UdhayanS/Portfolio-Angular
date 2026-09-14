@@ -1,0 +1,364 @@
+:host {
+  display: block;
+}
+
+.hero {
+  background: var(--ink);
+  color: var(--on-ink);
+  padding-top: clamp(5.5rem, 11vh, 8rem);
+}
+
+/* ---------- Upper band ---------- */
+/* Pre-hydration fallback only — FitText overwrites this per line within a
+   frame. Kept conservative so the un-fitted first paint doesn't overshoot. */
+.hero__title {
+  font-size: clamp(2.2rem, 9.4vw, 12rem);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.hero__title-line {
+  display: block;
+}
+
+.hero__title-line--alt {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--on-ink);
+  text-stroke: 2px var(--on-ink);
+}
+
+.hero__slash {
+  color: var(--lime);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+  margin-right: 0.08em;
+}
+
+.hero__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.hero__para {
+  font-size: clamp(0.95rem, 1.05vw, 1.06rem);
+  line-height: 1.58;
+  color: var(--on-ink-dim);
+  max-width: 44ch;
+}
+
+.hero__cta {
+  justify-self: end;
+  align-self: center;
+  white-space: nowrap;
+}
+
+/* ---------- Lower panel: the stage ---------- */
+.hero__stage-wrap {
+  background: var(--ink);
+  padding-right: clamp(0px, 3vw, 4.5rem);
+}
+
+.hero__stage {
+  position: relative;
+  background-color: var(--paper);
+  color: var(--on-paper);
+  border-radius: 0 clamp(90px, 24vw, 400px) clamp(90px, 24vw, 400px) 0;
+  aspect-ratio: 16 / 9;
+  min-height: 520px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Perspective lives here, inside the clip, so nothing flattens the planes. */
+.hero__depth {
+  position: absolute;
+  inset: 0;
+}
+
+/* Portrait sits on the z=0 plane, anchored to the floor of the stage. */
+.hero__portrait {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  height: 96%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: grayscale(1) contrast(1.14) brightness(1.02);
+  }
+}
+
+.hero__wordmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.hero__wordmark-name {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.86;
+}
+
+.hero__wordmark-sub {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* ---------- Stickers ---------- */
+.hero__stickers {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.hero__slot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  /* A real width, not just a cap — shrink-to-fit made the card stickers
+     inconsistent and let the longer labels run tall. */
+  width: clamp(170px, 16%, 250px);
+}
+
+.sticker {
+  position: relative;
+  pointer-events: auto;
+  padding: 0.85rem 1.05rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(11, 11, 11, 0.26);
+  transition: scale 260ms var(--ease-spring);
+}
+
+.sticker:hover {
+  scale: 1.06;
+}
+
+.sticker__title span {
+  display: block;
+}
+
+.sticker__icon {
+  flex: none;
+  margin-top: 0.15rem;
+  opacity: 0.85;
+}
+
+/* Circular badge variant */
+.sticker--disc {
+  width: clamp(140px, 15vw, 200px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+
+  .sticker__body {
+    max-width: 68%;
+  }
+
+  .sticker__title {
+    font-size: clamp(0.85rem, 1.05vw, 1.15rem);
+  }
+
+  .sticker__sub {
+    display: none;
+  }
+
+  .sticker__icon {
+    margin-top: 0;
+  }
+}
+
+.sticker__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: ring-spin 26s linear infinite;
+
+  text {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    fill: currentColor;
+  }
+}
+
+@keyframes ring-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker__ring {
+    animation: none;
+  }
+}
+
+/* ---------- Ticker ---------- */
+.hero__ticker {
+  overflow: hidden;
+  border-block: 1.5px solid var(--line-dark);
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding-block: 1rem;
+  background: var(--ink);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.hero__track {
+  display: flex;
+  width: max-content;
+  animation: ticker 38s linear infinite;
+}
+
+.hero__group {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.hero__item {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2.1vw, 1.9rem);
+  letter-spacing: 0.01em;
+  color: var(--on-ink);
+  white-space: nowrap;
+}
+
+.hero__sep {
+  color: var(--lime);
+  margin-inline: 1.4rem;
+  font-size: 0.85rem;
+}
+
+@keyframes ticker {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__track {
+    animation: none;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .hero__meta {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .hero__cta {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero__meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__stage-wrap {
+    padding-right: 0;
+  }
+
+  .hero__stage {
+    aspect-ratio: auto;
+    min-height: 0;
+    border-radius: 0 clamp(60px, 18vw, 140px) 0 0;
+    padding: 2.5rem var(--gutter) 0;
+  }
+
+  .hero__depth {
+    position: static;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  /* Below the fold of a phone the collage stops being a collage: the
+     stickers become an honest, readable stack. */
+  .hero__portrait {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    translate: none;
+    height: auto;
+    max-height: 62vh;
+  }
+
+  .hero__stickers {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .hero__slot {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+  }
+
+  .sticker--disc {
+    width: 100%;
+    aspect-ratio: auto;
+    border-radius: 12px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 0.85rem 1.05rem;
+
+    .sticker__body {
+      max-width: none;
+    }
+
+    .sticker__sub {
+      display: block;
+    }
+  }
+
+  .sticker__ring {
+    display: none;
+  }
+}

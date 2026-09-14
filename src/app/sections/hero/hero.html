@@ -1,0 +1,122 @@
+<section class="hero" id="top">
+  <!-- ── Upper band: the statement ─────────────────────────────── -->
+  <div class="hero__top shell">
+    <h1 class="hero__title display">
+      <!-- Each line measures itself and scales to fill the row exactly, so the
+           masthead spans edge to edge like the reference regardless of viewport
+           or how the copy is edited. -->
+      <!-- No stray whitespace inside these spans: with `nowrap` a leading or
+           trailing newline collapses to a real space and is measured. -->
+      <span class="hero__title-line" appFitText [appFitTextMax]="250">{{ hero.headline }}</span
+      ><span
+        class="hero__title-line hero__title-line--alt"
+        appFitText
+        [appFitTextMax]="250"
+      ><span class="hero__slash" aria-hidden="true">/</span>{{ hero.headlineAlt }}</span>
+    </h1>
+
+    <div class="hero__meta">
+      <p class="hero__para" appReveal="60">{{ hero.now }}</p>
+      <p class="hero__para" appReveal="140">{{ hero.wide }}</p>
+      <a class="hero__cta link-arrow" href="#contact" appReveal="220">
+        {{ hero.cta }}
+        <app-icon name="arrow" [size]="18" />
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Lower panel: the spatial collage ──────────────────────── -->
+  <div class="hero__stage-wrap">
+    <!-- The rounded clip lives on this outer box on purpose: `overflow` forces
+         `transform-style` back to flat, which would collapse every depth plane
+         if it sat on the perspective element itself. -->
+    <div class="hero__stage gridpaper">
+      <div class="hero__depth" [appSpatialStage]="1">
+        <!-- Depth layer 0: the portrait -->
+        <div class="hero__portrait plane" style="--depth: 0; --drift: 0.45">
+          @if (hasPortrait()) {
+            <img
+              src="/hero/portrait.png"
+              [alt]="hero.portraitAlt"
+              width="900"
+              height="1200"
+              fetchpriority="high"
+              decoding="async"
+              (error)="onPortraitError()"
+            />
+          } @else {
+            <!-- Fallback until portrait.png is added: a typographic centrepiece -->
+            <div class="hero__wordmark" role="img" [attr.aria-label]="hero.portraitAlt">
+              <span class="hero__wordmark-name display">Udhayan</span>
+              <span class="hero__wordmark-name display">S.</span>
+              <span class="hero__wordmark-sub">{{ profile.location }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Depth layers above: the stickers -->
+        <ul class="hero__stickers">
+          @for (s of stickers; track s.id) {
+            <li
+              class="hero__slot plane"
+              [style.--depth]="s.depth"
+              [style.--drift]="s.drift"
+              [style.--x.%]="s.x"
+              [style.--y.%]="s.y"
+            >
+              <div
+                class="sticker"
+                [class.sticker--disc]="s.shape === 'disc'"
+                [style.--bg]="'var(--' + s.colour + ')'"
+                [style.--tilt.deg]="s.tilt"
+              >
+                @if (s.ring) {
+                  <svg class="sticker__ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                      <path
+                        [attr.id]="'ring-' + s.id"
+                        d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"
+                      />
+                    </defs>
+                    <text>
+                      <textPath [attr.href]="'#ring-' + s.id">{{ s.ring }}</textPath>
+                    </text>
+                  </svg>
+                }
+
+                <div class="sticker__body">
+                  <p class="sticker__title">
+                    @for (line of lines(s.title); track $index) {
+                      <span>{{ line }}</span>
+                    }
+                  </p>
+                  @if (s.sub) {
+                    <p class="sticker__sub">{{ s.sub }}</p>
+                  }
+                </div>
+
+                <span class="sticker__icon" aria-hidden="true">
+                  <app-icon [name]="$any(s.icon)" [size]="26" [weight]="1.7" />
+                </span>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Ticker ────────────────────────────────────────────────── -->
+  <div class="hero__ticker" aria-hidden="true">
+    <div class="hero__track">
+      @for (pass of [0, 1]; track pass) {
+        <span class="hero__group">
+          @for (item of marquee; track item) {
+            <span class="hero__item">{{ item }}</span>
+            <span class="hero__sep">✦</span>
+          }
+        </span>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+[build]
+  command = "npm run build"
+  publish = "dist/udhayan-portfolio/browser"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The app is fully prerendered, so real files win. This only catches paths that
+# don't exist on disk and lets the Angular router resolve them.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Hashed build output is immutable — cache it hard.
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/hero/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

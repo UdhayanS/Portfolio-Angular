@@ -1,0 +1,48 @@
+<section class="about section section--paper gridpaper" id="about">
+  <div class="shell">
+    <!-- Stat strip: the numbers, as physical cards on their own depth planes -->
+    <ul class="stats stage" [appSpatialStage]="0.6">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <li
+          class="stats__card plane"
+          [style.--depth]="20 + i * 14"
+          [style.--drift]="0.5 + i * 0.16"
+          [style.--accent]="'var(--' + stat.accent + ')'"
+          [appReveal]="i * 90"
+        >
+          <span class="stats__value display">{{ stat.value }}</span>
+          <span class="stats__label">{{ stat.label }}</span>
+        </li>
+      }
+    </ul>
+
+    <div class="about__grid">
+      <div class="about__lead">
+        <p class="kicker" appReveal>
+          <span class="about__dot"></span>
+          {{ about.kicker }}
+        </p>
+        <h2 class="about__title display" appReveal="60">{{ about.headline }}</h2>
+
+        <dl class="about__facts" appReveal="120">
+          @for (fact of about.facts; track fact.k) {
+            <div class="about__fact">
+              <dt>{{ fact.k }}</dt>
+              <dd>{{ fact.v }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
+
+      <div class="about__body">
+        @for (para of about.body; track $index) {
+          <p class="about__para" [appReveal]="$index * 100">{{ para }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="about__quote">
+      <app-pull-quote [quote]="quote" placement="end" />
+    </div>
+  </div>
+</section>
