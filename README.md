@@ -1,205 +1,691 @@
 # Udhayan S — Portfolio
 
-A neo-brutalist "sticker collage" portfolio with a **CSS 3D spatial hero**, built in
-Angular 22 and **fully prerendered** to static HTML.
+A neo-brutalist **sticker-collage portfolio** with a CSS 3D spatial hero, built with **Angular 22** and fully prerendered to static HTML.
 
-- **Spatial UI** — stickers, stat cards and project cards sit on real `translateZ`
-  depth planes inside a `perspective` stage and parallax with the pointer. No WebGL,
-  no animation library, **0 KB** of extra JavaScript.
-- **SEO-first** — every word ships in the prerendered HTML, plus a
-  `Person` / `WebSite` / `ItemList` JSON-LD graph, Open Graph, Twitter cards and a
-  canonical URL.
-- **Accessible** — full keyboard nav, skip link, `prefers-reduced-motion` honoured
-  everywhere (all motion is disabled, not just slowed), and the collage collapses
-  into a readable stack on touch devices.
+The portfolio combines a bold visual system with an SEO-first architecture, accessible interactions, and zero runtime animation dependencies.
 
-```
-90 KB transferred · 1 prerendered route · no trackers
-```
+> **90 KB transferred · 1 prerendered route · no trackers**
 
 ---
 
-## Run it
+## ✨ Highlights
+
+* **CSS 3D spatial hero**
+
+  * Real `translateZ()` depth planes
+  * Perspective-based spatial layout
+  * Pointer-driven parallax
+  * No WebGL
+  * No animation libraries
+  * **0 KB of additional JavaScript for the spatial effect**
+
+* **SEO-first**
+
+  * Fully prerendered HTML
+  * All visible content available in the initial HTML
+  * `Person`, `WebSite`, and `ItemList` JSON-LD
+  * Open Graph metadata
+  * Twitter cards
+  * Canonical URL
+  * Sitemap and robots configuration
+
+* **Accessible**
+
+  * Keyboard navigation
+  * Skip-to-content link
+  * Semantic HTML
+  * `prefers-reduced-motion` support
+  * Motion completely disabled when reduced motion is requested
+  * Spatial collage collapses into a readable layout on touch devices
+
+* **Single source of content**
+
+  * Portfolio copy lives in one TypeScript data file
+  * Updating the content automatically updates the UI and structured data
+
+* **Performance focused**
+
+  * Static prerendering
+  * Lazy-loaded EmailJS SDK
+  * No trackers
+  * Immutable caching for hashed assets
+  * Lightweight client-side JavaScript
+
+---
+
+## 🖼️ Preview
+
+Add screenshots or a screen recording here.
+
+```text
+Coming soon
+```
+
+You can also add your live portfolio:
+
+**Live:** `https://your-domain.com`
+
+---
+
+## 🛠️ Tech Stack
+
+| Category      | Technology                         |
+| ------------- | ---------------------------------- |
+| Framework     | Angular 22                         |
+| Language      | TypeScript                         |
+| Styling       | SCSS                               |
+| 3D / Parallax | CSS `perspective` + `translateZ()` |
+| Animation     | CSS + native browser APIs          |
+| Scroll reveal | `IntersectionObserver`             |
+| Contact form  | EmailJS                            |
+| SEO           | Angular SEO service + JSON-LD      |
+| Deployment    | Netlify                            |
+| Hosting       | Static prerendered output          |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js
+* npm
+
+### Installation
+
+Clone the repository and install dependencies:
 
 ```bash
 npm install
-npm start            # dev server → http://localhost:4200
-npm run build        # prerendered output → dist/udhayan-portfolio/browser
-npm run preview      # serve the built static site → http://localhost:4300
+```
+
+### Development server
+
+```bash
+npm start
+```
+
+The application will be available at:
+
+```text
+http://localhost:4200
+```
+
+### Production build
+
+```bash
+npm run build
+```
+
+The prerendered output is generated at:
+
+```text
+dist/udhayan-portfolio/browser
+```
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+The static site will be available at:
+
+```text
+http://localhost:4300
+```
+
+### Type checking
+
+```bash
 npm run typecheck
 ```
 
 ---
 
-## Where the content lives
+## 📁 Project Structure
 
-**All copy is in one file:** `src/app/core/data/profile.ts`. Nothing is hardcoded
-in a template. Edit that file and everything — the hero, the collage stickers,
-the stats, the timeline, the project grid, the services, the quotes, the JSON-LD —
-updates together.
+```text
+src/
+├── app/
+│   ├── core/
+│   │   ├── data/
+│   │   │   └── profile.ts
+│   │   │
+│   │   ├── directives/
+│   │   │   ├── spatial-stage.ts
+│   │   │   ├── reveal.ts
+│   │   │   └── fit-text.ts
+│   │   │
+│   │   └── services/
+│   │       ├── seo.ts
+│   │       └── mailer.ts
+│   │
+│   ├── sections/
+│   │   ├── nav/
+│   │   ├── hero/
+│   │   ├── about/
+│   │   ├── stack/
+│   │   ├── experience/
+│   │   ├── work/
+│   │   ├── services/
+│   │   ├── achievements/
+│   │   ├── contact/
+│   │   └── footer/
+│   │
+│   ├── shared/
+│   │   ├── icon/
+│   │   ├── pull-quote/
+│   │   └── section-head/
+│   │
+│   └── pages/
+│       └── home/
+│
+└── styles.scss
+```
 
-| Export | Drives |
-| --- | --- |
-| `PROFILE` | Name, contact details, social links |
-| `HERO` | The two hero paragraphs and headline |
-| `STICKERS` | The floating collage badges — position, colour, tilt, **depth** |
-| `MARQUEE` | The scrolling ticker under the hero |
-| `STATS` | The four number cards |
-| `ABOUT` | Bio paragraphs and the fact table |
-| `SKILLS` | Grouped stack rows |
-| `ROLES`, `EDUCATION` | The experience timeline |
-| `PROJECTS` | Every project card (filter by `kind`) |
-| `SERVICES` | The SEO / domain / mail / deploy cards |
-| `ACHIEVEMENTS`, `CERTIFICATIONS` | The track-record badges |
-| `QUOTES` | The pull quote at every section boundary |
+---
 
-### Moving a sticker
+# 📝 Content Architecture
 
-Each entry in `STICKERS` positions itself on the collage:
+All portfolio content is maintained in a single file:
+
+```text
+src/app/core/data/profile.ts
+```
+
+There is no need to edit individual templates to update portfolio content.
+
+| Export           | Purpose                                        |
+| ---------------- | ---------------------------------------------- |
+| `PROFILE`        | Name, contact information and social links     |
+| `HERO`           | Hero headline and introduction                 |
+| `STICKERS`       | Floating collage stickers, positions and depth |
+| `MARQUEE`        | Scrolling ticker beneath the hero              |
+| `STATS`          | Statistics cards                               |
+| `ABOUT`          | Biography and personal facts                   |
+| `SKILLS`         | Technology and skill groups                    |
+| `ROLES`          | Professional experience                        |
+| `EDUCATION`      | Education timeline                             |
+| `PROJECTS`       | Portfolio projects                             |
+| `SERVICES`       | Services offered                               |
+| `ACHIEVEMENTS`   | Awards and achievements                        |
+| `CERTIFICATIONS` | Certifications                                 |
+| `QUOTES`         | Section pull quotes                            |
+
+This keeps the content layer independent from the presentation layer.
+
+---
+
+# 🎨 Customizing the Spatial Collage
+
+The hero collage is driven by the `STICKERS` configuration.
+
+Each sticker defines its position, rotation, depth and parallax behaviour:
 
 ```ts
 {
-  x: 13,        // % from the left of the stage
-  y: 12,        // % from the top
-  tilt: -6,     // degrees of rotation
-  depth: 120,   // px toward the viewer — higher = floats closer = parallaxes more
-  drift: 1.5,   // pointer-reaction multiplier
+  x: 13,
+  y: 12,
+  tilt: -6,
+  depth: 120,
+  drift: 1.5
 }
 ```
 
----
+### Properties
 
-## Two things you still need to add
+| Property | Description                          |
+| -------- | ------------------------------------ |
+| `x`      | Horizontal position as a percentage  |
+| `y`      | Vertical position as a percentage    |
+| `tilt`   | Base rotation in degrees             |
+| `depth`  | Distance toward the viewer in pixels |
+| `drift`  | Pointer-parallax multiplier          |
 
-### 1. The hero portrait — `public/hero/portrait.png`
-
-The hero expects a **background-removed PNG**, roughly 900 × 1200, shot from the
-chest up. Send it in **colour** — the black-and-white treatment is applied in CSS
-(`grayscale(1) contrast(1.14)`), so the source stays reusable.
-
-Until that file exists the hero automatically falls back to a typographic
-wordmark, so nothing is broken in the meantime.
-
-### 2. A social preview image — `public/og-image.png`
-
-1200 × 630. This is what appears when the link is shared on LinkedIn or WhatsApp.
+Higher `depth` values make elements appear closer to the viewer and increase their perceived parallax movement.
 
 ---
 
-## Deploying to Netlify
+# 🧊 How the 3D Spatial Layer Works
 
-`netlify.toml` is already configured — build command, publish directory, security
-headers, immutable caching for hashed assets, and a SPA fallback.
+The spatial system intentionally avoids WebGL and animation libraries.
 
-1. Push this repo to GitHub.
-2. Netlify → **Add new site** → **Import an existing project** → pick the repo.
-3. Netlify reads `netlify.toml`; no manual settings needed. Deploy.
+`SpatialStage` calculates the pointer position and exposes only two CSS custom properties:
 
-### Custom domain
-
-1. Netlify → **Domain management** → **Add a domain**.
-2. Point the registrar at Netlify's nameservers (easiest), **or** keep your DNS
-   and add:
-   - `A` record on the apex `@` → `75.2.60.5`
-   - `CNAME` on `www` → `<your-site>.netlify.app`
-3. Netlify provisions Let's Encrypt SSL automatically once DNS resolves.
-4. **Update the hardcoded domain** in three places once you know it:
-   - `SITE_URL` in `src/app/core/services/seo.ts`
-   - `public/robots.txt`
-   - `public/sitemap.xml`
-
-### The contact form
-
-Uses **EmailJS**, carried over from the previous portfolio. Config lives in
-`src/app/core/services/mailer.ts`:
-
-| | |
-| --- | --- |
-| Service | `service_lfwsykn` |
-| Template | `template_8vefdke` |
-| Public key | `NjiX1UJLL4RlnXE7r` |
-
-The app sends five params — `name`, `email`, `subject`, `message`, `time`. The
-first four come from the form; `time` is stamped in IST by the mailer, because
-EmailJS does not provide it. **If you rename a field, rename it in the EmailJS
-template too**, or that value arrives empty.
-
-### The email templates — `email-templates/`
-
-| File | Role | Params used |
-| --- | --- | --- |
-| `auto-reply.html` | Confirmation to whoever wrote in | `name`, `subject`, `message` |
-| `new-message.html` | Notification to you | `name`, `email`, `subject`, `time`, `message` |
-
-Paste each into the EmailJS template editor's **code view**. In the auto-reply
-template set **To** to `{{email}}`; in the notification set **To** to your own
-address and **Reply-To** to `{{email}}` so hitting reply threads correctly.
-
-Both are deliberately **image-free**. The previous templates pulled the banner
-and avatar from LinkedIn's CDN, whose URLs are signed with an expiry — the ones
-in the old repo (`e=1782345600`) died on **25 June 2026**, so those emails have
-been arriving with broken images. Typography carries the design instead, so
-there is nothing to expire and nothing for a client to block.
-
-Other things they now do that the old pair didn't:
-
-- **Reply button works.** It was `href="#"`; it is now
-  `mailto:{{email}}?subject=Re:%20{{subject}}`.
-- **The notification shows who wrote.** The old one had name, time and message
-  but not the sender's email or subject — you couldn't reply from the email.
-- **Line breaks survive.** `white-space:pre-wrap` on the message block, so a
-  multi-paragraph enquiry doesn't collapse into one run-on paragraph.
-- **Outlook-safe.** Table layout, `bgcolor` alongside CSS, no `object-fit` or
-  negative margins (the old avatar used `margin-top:-32px`, which Outlook's Word
-  engine ignores — the image overlapped the banner instead of straddling it).
-- **Dark-mode opt-out**, so clients don't invert the palette into mud.
-
-The SDK is dynamically imported on first submit, so it stays out of the initial
-bundle and off the prerender path.
-
-**Lock the key down.** An EmailJS public key is meant to be visible in client
-code, but on its own it lets anyone send from *their* page using *your* monthly
-quota. In the EmailJS dashboard go to **Account → Security** and allow-list your
-domain. The client also throttles to one send per 10s and blocks headless
-browsers, but that is a speed bump, not the fix.
-
----
-
-## Project shape
-
-```
-src/
-├─ app/
-│  ├─ core/
-│  │  ├─ data/profile.ts          ← all content
-│  │  ├─ directives/
-│  │  │  ├─ spatial-stage.ts      ← publishes --mx/--my; the whole 3D engine
-│  │  │  └─ reveal.ts             ← IntersectionObserver scroll reveal
-│  │  │  └─ fit-text.ts           ← scales a headline to fill its row
-│  │  └─ services/
-│  │     ├─ seo.ts                ← meta tags + JSON-LD graph
-│  │     └─ mailer.ts             ← EmailJS config + lazy-loaded send
-│  ├─ sections/                   ← nav, hero, about, stack, experience,
-│  │                                work, services, achievements, contact, footer
-│  ├─ shared/                     ← icon, pull-quote, section-head
-│  └─ pages/home/
-└─ styles.scss                    ← design tokens + .stage/.plane/.sticker system
+```text
+--mx
+--my
 ```
 
-### How the spatial layer works
+Both values are normalized to the range:
 
-`SpatialStage` writes exactly two CSS custom properties — `--mx` and `--my`,
-normalised to `-1..1` — once per animation frame. Every `.plane` element consumes
-them in a single CSS `transform`:
+```text
+-1 → 1
+```
+
+The directive updates these values once per animation frame.
+
+Individual planes then consume those values directly in CSS:
 
 ```css
 transform:
-  translate3d(calc(var(--mx) * var(--drift) * 18px), …, calc(var(--depth) * 1px))
-  rotateY(calc(var(--mx) * var(--drift) * 3.6deg));
+  translate3d(
+    calc(var(--mx) * var(--drift) * 18px),
+    ...,
+    calc(var(--depth) * 1px)
+  )
+  rotateY(
+    calc(var(--mx) * var(--drift) * 3.6deg)
+  );
 ```
 
-Because depth is per-element, near stickers travel further than the portrait
-behind them and the parallax reads as real space. The directive bails out
-entirely on coarse pointers and under `prefers-reduced-motion`.
-#   P o r t f o l i o - A n g u l a r  
- 
+Each element has its own depth and drift values, creating the illusion of a physical layered space.
+
+For example:
+
+```text
+Background
+    ↓
+Portrait
+    ↓
+Stats
+    ↓
+Stickers
+    ↓
+Foreground elements
+```
+
+The closer an element is to the viewer, the stronger its parallax response.
+
+---
+
+## ♿ Accessibility & Reduced Motion
+
+The spatial system automatically disables itself when:
+
+* The device uses a coarse pointer
+* `prefers-reduced-motion: reduce` is enabled
+
+Reduced motion is handled as an actual mode switch rather than simply reducing animation speed.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Motion is disabled */
+}
+```
+
+On touch devices, the spatial collage also collapses into a conventional readable layout.
+
+---
+
+# 🔍 SEO
+
+The portfolio is designed to be SEO-friendly from the initial HTML response.
+
+### Included
+
+* Prerendered HTML
+* Semantic markup
+* Canonical URL
+* Open Graph metadata
+* Twitter card metadata
+* `robots.txt`
+* `sitemap.xml`
+* JSON-LD structured data
+
+The structured data contains:
+
+```text
+Person
+WebSite
+ItemList
+```
+
+SEO metadata is managed through:
+
+```text
+src/app/core/services/seo.ts
+```
+
+---
+
+# 🖼️ Required Assets
+
+Two assets still need to be added before the portfolio is considered complete.
+
+## 1. Hero Portrait
+
+Location:
+
+```text
+public/hero/portrait.png
+```
+
+Recommended specifications:
+
+* PNG
+* Background removed
+* Approximately `900 × 1200`
+* Chest-up portrait
+* Original image in colour
+
+The portfolio applies the visual treatment through CSS:
+
+```css
+filter: grayscale(1) contrast(1.14);
+```
+
+Keeping the source image in colour makes the asset reusable elsewhere.
+
+If the image is missing, the hero automatically falls back to a typographic wordmark.
+
+---
+
+## 2. Social Preview Image
+
+Location:
+
+```text
+public/og-image.png
+```
+
+Recommended size:
+
+```text
+1200 × 630
+```
+
+This image is used when the portfolio URL is shared on platforms such as LinkedIn and WhatsApp.
+
+---
+
+# 📬 Contact Form
+
+The contact form uses **EmailJS**.
+
+The integration is located at:
+
+```text
+src/app/core/services/mailer.ts
+```
+
+The EmailJS SDK is dynamically imported only when the user submits the form, keeping it out of the initial bundle and prerendering path.
+
+### Parameters
+
+The application sends:
+
+```text
+name
+email
+subject
+message
+time
+```
+
+The first four values come directly from the contact form.
+
+`time` is generated by the mailer in IST because EmailJS does not provide the submission timestamp required by the notification template.
+
+> If a form field is renamed, the corresponding EmailJS template variable must also be renamed.
+
+---
+
+# ✉️ Email Templates
+
+Email templates are stored in:
+
+```text
+email-templates/
+├── auto-reply.html
+└── new-message.html
+```
+
+| Template           | Purpose                                  | Parameters                                    |
+| ------------------ | ---------------------------------------- | --------------------------------------------- |
+| `auto-reply.html`  | Confirmation sent to the visitor         | `name`, `subject`, `message`                  |
+| `new-message.html` | Notification sent to the portfolio owner | `name`, `email`, `subject`, `time`, `message` |
+
+Paste each template into the EmailJS template editor using **Code View**.
+
+### Auto-reply
+
+Set:
+
+```text
+To → {{email}}
+```
+
+### Notification
+
+Set:
+
+```text
+To → your email address
+Reply-To → {{email}}
+```
+
+This allows replies to go directly to the person who submitted the form.
+
+---
+
+## 📧 Email Template Design
+
+The templates intentionally avoid external images.
+
+The previous implementation depended on LinkedIn CDN assets with expiring signed URLs. Those URLs expired on **25 June 2026**, causing broken images in previously delivered emails.
+
+The new templates are:
+
+* Image-free
+* Table-based for email-client compatibility
+* Outlook-friendly
+* Dark-mode aware
+* Compatible with multi-line messages
+* Designed without negative margins or unsupported layout tricks
+
+The notification email also includes:
+
+* Sender name
+* Sender email
+* Subject
+* Submission time
+* Full message
+* Functional reply action
+
+Line breaks are preserved with:
+
+```css
+white-space: pre-wrap;
+```
+
+---
+
+# 🔐 EmailJS Security
+
+The EmailJS public key is intentionally exposed in client-side code because it is designed to be a public credential.
+
+However, the key should still be restricted.
+
+In the EmailJS dashboard:
+
+```text
+Account → Security
+```
+
+Allow-list the production domain.
+
+The application also includes client-side protections such as:
+
+* 10-second send throttling
+* Headless-browser detection
+
+These are only additional safeguards and should not replace domain restrictions in EmailJS.
+
+---
+
+# 🌐 Deploying to Netlify
+
+The repository already contains:
+
+```text
+netlify.toml
+```
+
+It handles:
+
+* Build command
+* Publish directory
+* Security headers
+* Immutable caching for hashed assets
+* SPA fallback
+
+### Deployment
+
+1. Push the repository to GitHub.
+2. Open Netlify.
+3. Select **Add new site**.
+4. Choose **Import an existing project**.
+5. Select the GitHub repository.
+6. Deploy.
+
+Netlify will use the existing `netlify.toml` configuration.
+
+---
+
+# 🌍 Custom Domain
+
+After deploying:
+
+1. Open **Domain management** in Netlify.
+2. Select **Add a domain**.
+3. Configure DNS using either Netlify nameservers or your existing DNS provider.
+
+For DNS-based configuration:
+
+```text
+A      @      → 75.2.60.5
+CNAME  www    → <your-site>.netlify.app
+```
+
+Netlify automatically provisions a Let's Encrypt SSL certificate once DNS is correctly configured.
+
+After the final domain is known, update it in:
+
+```text
+src/app/core/services/seo.ts
+public/robots.txt
+public/sitemap.xml
+```
+
+---
+
+# ⚡ Performance
+
+The portfolio is intentionally designed around a small client-side footprint.
+
+### Principles
+
+* Static prerendering
+* No WebGL
+* No animation framework
+* No external animation dependency
+* Lazy-loaded EmailJS
+* CSS-driven spatial effects
+* Native `IntersectionObserver`
+* Hashed asset caching
+* No trackers
+
+Target build characteristics:
+
+```text
+~90 KB transferred
+1 prerendered route
+0 trackers
+```
+
+---
+
+# 🧩 Architecture Overview
+
+```text
+                    ┌─────────────────────┐
+                    │   profile.ts        │
+                    │  Single Source      │
+                    │    of Content       │
+                    └──────────┬──────────┘
+                               │
+          ┌────────────────────┼────────────────────┐
+          ↓                    ↓                    ↓
+     Components            SEO Service          JSON-LD
+          │                    │                    │
+          ↓                    ↓                    ↓
+       HTML/CSS          Meta Tags             Structured Data
+          │
+          ↓
+    Prerendered Site
+          │
+          ├── Netlify
+          │
+          └── Static HTML
+```
+
+The portfolio separates:
+
+```text
+Content
+   ↓
+Presentation
+   ↓
+SEO
+   ↓
+Deployment
+```
+
+This makes content updates possible without modifying individual section templates.
+
+---
+
+# 📜 Scripts
+
+| Command             | Description                       |
+| ------------------- | --------------------------------- |
+| `npm install`       | Install dependencies              |
+| `npm start`         | Start development server          |
+| `npm run build`     | Build and prerender the portfolio |
+| `npm run preview`   | Preview the production build      |
+| `npm run typecheck` | Run TypeScript type checking      |
+
+---
+
+# 📌 Roadmap
+
+* [ ] Add final hero portrait
+* [ ] Add social preview image
+* [ ] Configure production domain
+* [ ] Verify Open Graph previews
+* [ ] Verify sitemap and canonical URL
+* [ ] Configure EmailJS domain allow-list
+* [ ] Deploy to Netlify
+* [ ] Run Lighthouse/accessibility checks
+
+---
+
+# 👤 Author
+
+**Udhayan S**
+
+Software Engineer focused on building scalable web applications, developer tools and practical products.
+
+* GitHub: `UdhayanS`
+* LinkedIn: `udhayan-sk7`
+* Portfolio: `udhayan-portfolio.netlify.app`
+
+---
+
+## 📄 License
+
+This project is a personal portfolio.
+
+The source code is available for reference and learning. Personal branding, content, photographs, and other identity-specific assets are not intended for reuse.
